@@ -1,0 +1,17 @@
+Wavelength,Element,AttentionFocus
+15433,O,Teff
+15483,S,*All (except logg)
+15770,Mg,*FeMgOlogg
+15893,Si,*FeMgO
+15959,Mg,MgOTeff
+15970,Fe,Fe
+16372,O,*MgOTeff
+16386,Fe,*MgOFeTeff
+16530,Fe,MgOFe
+16629,C,MgFeOTeff
+16660,O,*Teff
+16812.5,Br11,*All
+16877,O,Teff
+16910,O,*Teff
+
+
