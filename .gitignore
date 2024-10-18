@@ -20,6 +20,10 @@ venv/
 env/
 *.env
 
+# PyTorch model files
+*.pt
+
+
 # Distribution / packaging
 .Python
 build/
