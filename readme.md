@@ -66,7 +66,7 @@ Contains scripts and data for evaluating the models and generating the figures p
   - `PyTorch`
   - `scikit-learn`
   - `astroNN`
-- See `requirements.txt` for a complete list of dependencies.
+- See `enviornment.yml` for a complete list of dependencies.
 - **Other Dependencies:**
   - Access to APOGEE spectra data files for data preparation.
   - A GPU.
