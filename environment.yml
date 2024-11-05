@@ -262,6 +262,7 @@ dependencies:
       - google-pasta==0.2.0
       - grpcio==1.59.0
       - h11==0.14.0
+      - highlight-text==0.2
       - html5lib==1.1
       - httpcore==1.0.5
       - httpx==0.27.0
@@ -297,6 +298,7 @@ dependencies:
       - pyasn1-modules==0.3.0
       - pydantic==2.7.1
       - pydantic-core==2.18.2
+      - pynndescent==0.5.13
       - pytube==15.0.0
       - pyvo==1.4.2
       - qtconsole==5.5.2
@@ -320,6 +322,8 @@ dependencies:
       - transformers==4.36.1
       - txaio==23.1.1
       - typing-extensions==4.11.0
+      - umap==0.1.1
+      - umap-learn==0.5.7
       - uncertainties==3.1.7
       - vpython==7.6.5
       - werkzeug==3.0.0
