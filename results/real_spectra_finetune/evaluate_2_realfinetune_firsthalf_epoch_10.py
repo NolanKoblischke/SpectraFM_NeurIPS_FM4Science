@@ -11,7 +11,7 @@ torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.allow_tf32 = True
 
 model_dir = "../../training/2_realfinetune_firsthalf/1_basemodel_synthetic_epoch325/epoch_10"
-spectra_test_dir = "../../dataset/aspcap_spectra_test_cleaned_may26.npy"
+spectra_test_dir = "../../dataset/aspcap_spectra_test.npy"
 labels_test_dir = "../../dataset/labels_test.npy"
 wavelength_sol_dir = "../../dataset/apogee_wavelength_sol.csv"
 

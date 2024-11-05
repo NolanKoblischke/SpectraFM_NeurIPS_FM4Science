@@ -28,7 +28,7 @@ def cleanup():
 def load_and_preprocess_data():
     synspec_indices = np.arange(0, 7514)
     synspec_size = len(synspec_indices)
-    syn_train = np.load("../data/synspec_train_cleaned_may26.npy")
+    syn_train = np.load("../data/synspec_train.npy")
     labels_train = np.load("../data/labels_train.npy")
     label_errs_train = np.load("../data/label_errs_train.npy")
     wavelength_sol = np.loadtxt("../data/apogee_wavelengt_sol.csv", delimiter=",")

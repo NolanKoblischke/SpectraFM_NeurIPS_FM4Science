@@ -56,7 +56,7 @@ spectra_indices = np.arange(4107,4619)
 pt_spectra_indices = spectra_indices
 spectra_size = len(spectra_indices)
 
-spectra_train = np.load("../../dataset/aspcap_spectra_train_cleaned_may26.npy")
+spectra_train = np.load("../../dataset/aspcap_spectra_train.npy")
 #replace nan with 1.0
 spectra_train[np.isnan(spectra_train)] = 1.0
 labels_train = np.load("../../dataset/labels_train.npy")
@@ -142,7 +142,7 @@ means_stddevs = np.load("means_stddevs.npz")
 spectra_mean = means_stddevs['spectra_mean']
 labels_mean = means_stddevs['labels_mean']
 labels_std = means_stddevs['labels_std']
-spectra_test = np.load("../../dataset/aspcap_spectra_test_cleaned_may26.npy")
+spectra_test = np.load("../../dataset/aspcap_spectra_test.npy")
 spectra_test[np.isnan(spectra_test)] = 1.0
 labels_test = np.load("../../dataset/labels_test.npy")
 labels_err_test = np.load("../../dataset/label_errs_test.npy")

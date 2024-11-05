@@ -25,7 +25,7 @@ spectra_indices = np.arange(0,3757)
 spectra_size = len(spectra_indices)
 
 # ================== training-related settings ==================
-spectra_train = np.load("../data/aspcap_spectra_train_cleaned_may26.npy")
+spectra_train = np.load("../data/aspcap_spectra_train.npy")
 labels_train = np.load("../data/labels_train.npy")
 label_errs_train = np.load("../data/label_errs_train.npy")
 wavelength_sol = np.loadtxt("../data/apogee_wavelengt_sol.csv", delimiter=",")

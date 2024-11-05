@@ -15,7 +15,7 @@ nn_model = StellarPerceptron.load("../../training/1_basemodel_synthetic/model_to
 context_window = 512
 
 # Load spectra and labels
-spectra_test = np.load("../../dataset/synspec_test_cleaned_may26.npy")
+spectra_test = np.load("../../dataset/synspec_test_cleaned.npy")
 labels_test = np.load("../../dataset/labels_test.npy")
 n_stars_for_test = len(spectra_test)
 

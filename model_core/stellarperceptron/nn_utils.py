@@ -77,34 +77,23 @@ class TrainingGenerator(torch.utils.data.Dataset):
         self.shuffle = shuffle  # shuffle row ordering, star level column ordering shuffle is mandatory
         self.aggregate_nans = aggregate_nans
 
-        # handle possible output tokens for star-by-star basis
         self.input_vocabs = input_vocabs
         self.outputs_name = outputs_name
         self.possible_output_tokens = possible_output_tokens
         self.possible_output_indices = [self.input_vocabs.index(name_i) for name_i in self.outputs_name]
-        # possible_output_tokens # [230 231 232 233 ..  29 of these
-        # outputs_name # ['Teff', 'logg', 'FeH', ... 29 of these
-        # possible_output_indices # [56, 23, 42 ... 29 of these These represent the index of that outputtoken in input
-        # if I have token 230, I can get possible_output_indices by doing possible_output_indices[possible_output_tokens.index(230)]
         assert len(self.possible_output_indices) == len(self.outputs_name) == len(self.possible_output_tokens)
         prob_matrix = np.tile(
             np.ones_like(possible_output_tokens, dtype=float), (self.data_length, 1)
         )
-        # print("Data length: ", self.data_length) # 900
-        # print("Num of possible output tokens: ", len(self.possible_output_tokens)) # 29
-        # print("Possible output tokens: ", self.possible_output_tokens) # [230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247
-        # print("Shape of input_idx: ", self.input_idx.shape) # [900, 129]
-        # #find indices of outputs_name in input_vocabs
         bad_idx = (
             self.input_idx[
                 np.arange(self.data_length),
-                np.expand_dims(self.possible_output_indices, -1), # index 229 is out of bounds for axis 1 with size 129
+                np.expand_dims(self.possible_output_indices, -1),
             ]
             == 0
         ).T
         # only need to do this once, very time consuming
         if aggregate_nans:  # aggregate nans to the end of each row
-            # partialsort_idx = np.argpartition(self.input_idx, np.sum(self.input_idx == 0, axis=1), axis=1)
             partialsort_idx = np.argsort(self.input_idx == 0, axis=1, kind="mergesort")
             self.input = np.take_along_axis(self.input, partialsort_idx, axis=1)
             self.input_idx = np.take_along_axis(self.input_idx, partialsort_idx, axis=1)

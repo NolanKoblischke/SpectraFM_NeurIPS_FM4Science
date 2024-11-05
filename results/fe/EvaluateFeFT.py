@@ -21,7 +21,7 @@ context_window = 512
 # Indices for 1.611 $\mu$m to 1.622 $\mu$m chunk
 spectra_indices = np.arange(4107,4619)
 spectra_size = len(spectra_indices)
-spectra_test = np.load("../dataset/aspcap_spectra_test_cleaned_may26.npy")
+spectra_test = np.load("../dataset/aspcap_spectra_test.npy")
 labels_test = np.load("../dataset/labels_test.npy")
 wavelength_sol = np.loadtxt("../dataset/apogee_wavelength_sol.csv", delimiter=",")
 

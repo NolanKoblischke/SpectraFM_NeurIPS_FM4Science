@@ -424,11 +424,6 @@ class StellarPerceptronCore(ABC):
 
         unique_tokens = np.unique(inputs_token)
 
-        # if (
-        #     inputs.ndim == 2 and np.squeeze(inputs_token).ndim == 1
-        # ):  # assuming inputs are nicely ordered
-        #     inputs_token = np.tile(inputs_token, (len(_inputs), 1))
-
         for i in unique_tokens:
             _inputs[inputs_token == i] *= self._input_std[i]
             _inputs[inputs_token == i] += self._input_mean[i]
@@ -778,7 +773,6 @@ class StellarPerceptronCore(ABC):
         pred, pred_err = self.inverse_standardize(pred, request_tokens, pred_err)
 
         all_pred = np.hstack((pred, pred_err))
-        # detokenize instead of getting from arguement to make sure the name is english
         col_names = self.detokenize(request_tokens[0])
         col_names.extend([f"{i}_error" for i in col_names])
         df = pd.DataFrame(all_pred, columns=col_names)
