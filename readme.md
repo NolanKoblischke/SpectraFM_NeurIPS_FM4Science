@@ -1,9 +1,12 @@
 ## SpectraFM: Tuning into Stellar Foundation Models
 
-This repository contains the code to reproduce the results presented in the paper.
+[Paper on OpenReview](https://openreview.net/forum?id=HLEQrER65D)
 
+This repository contains code, data preparation scripts, and model files for SpectraFM, a Transformer-based foundation model designed for cross-instrument spectroscopic analysis in stellar astrophysics. This version was published for the NeurIPS 2024 Foundation Models for Science workshop. Here we focus on APOGEE spectra. SpectraFM leverages synthetic and real spectroscopic data, along with a wavelength encoding mechanism, to predict stellar properties and chemical abundances across multiple datasets and wavelength ranges. Our model can achieve high accuracy in chemical abundance prediction via transfer knowledge from synthetic to real observational data with minimal fine-tuning.
 
-### `dataset/`
+Intermediate training data files and model files will soon be available in Zenodo (waiting for a doi from ArXiv before making a Zenodo upload).
+
+#### `dataset/`
 
 This folder contains scripts and data files used for preparing the dataset. It includes code for loading APOGEE spectra data, removing bad spectra as determined by a series of cuts, cleaning the spectra, and splitting it into training and testing sets suitable for model training and evaluation.
 
@@ -12,7 +15,7 @@ This folder contains scripts and data files used for preparing the dataset. It i
 - `spectra_all_zeroes_flag.npy`: Used to flag spectra that contain all zeroes and should be excluded from analysis.
 
 
-### `model_core/`
+#### `model_core/`
 
 Contains the core implementation of the transformer neural network SpectraFM, including the main architecture and utility functions like loading the data for training.
 
@@ -24,7 +27,7 @@ Contains the core implementation of the transformer neural network SpectraFM, in
 - `utils/`: Utility scripts for data handling and plotting.
   - `data_utils.py`: Functions for data manipulation and preprocessing, such as normalization and batching.
 
-### `training/`
+#### `training/`
 
 Includes scripts, configurations, and logs related to every step of our training process.
 
@@ -42,7 +45,7 @@ Includes scripts, configurations, and logs related to every step of our training
   - `checkpoints/`: Contains the saved model checkpoints for the basic neural network.
 - Additional scripts (`*.sh`, `*.out`): Shell scripts and output logs from training sessions.
 
-### `results/`
+#### `results/`
 
 Contains scripts and data for evaluating the models and generating the figures presented in the paper.
 
@@ -59,22 +62,22 @@ Contains scripts and data for evaluating the models and generating the figures p
   - `Figure4.py`, `Figure4.png`:Figure showing the attention maps overlaid on spectra.
   - `notable_spectral_lines.csv`: Spectral lines of interest that lined up with attention peaks. From ASPCAP fitting windows.
 
-## Dependencies
+#### Dependencies
 
 - **Python 3.x**
-- Required Python Packages of note:
-  - `PyTorch`
-  - `scikit-learn`
-  - `astroNN`
+- `PyTorch`
 - See `enviornment.yml` for a complete list of dependencies.
 - **Other Dependencies:**
-  - Access to APOGEE spectra data files for data preparation.
+  - Access to APOGEE spectra data files for data preparation. (See Zenodo link)
   - A GPU.
 
-## Notes
+#### Notes
 
-- **Data Availability:** Due to size constraints and licensing, the actual spectral data files (e.g., APOGEE spectra) are not included in the repository. Please ensure you have access to the necessary data before running the scripts. Instructions for obtaining the data are typically provided by the data providers (e.g., SDSS/APOGEE).
+- **Data Availability:** Due to size constraints and licensing, the actual spectral data files (e.g., APOGEE spectra) are not included in the repository. However, we provide intermediate training data files and model files in Zenodo.
 
 - **Configuration:** Adjust file paths and configuration settings in the scripts as needed to match your environment. For example, update paths to the spectral data in `create_dataset.py` and ensure that output directories exist.
 
-- **Hardware Requirements:** Training the models, especially the Transformer-based SpectraFM, is computationally intensive. It is recommended to use machines with sufficient GPU memory (e.g., 16 GB or more) to handle the computations efficiently.
+
+#### Acknowledgements
+
+This work builds off of the foundational work of [Leung & Bovy (2023)](https://arxiv.org/abs/2308.10944) and their [repository](https://github.com/henrysky/astroNN_stars_foundation).

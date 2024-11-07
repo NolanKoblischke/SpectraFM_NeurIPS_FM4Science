@@ -1,8 +1,8 @@
 ## Overview
 
-The `model_core/` directory contains the core implementation of **SpectraFM**, our Transformer-based foundation model for analyzing stellar spectra. This model is designed to handle spectral data from any instrument and wavelength range, providing a versatile tool for astrophysical research. The code in this directory is adapted and extended from the foundational work of [Leung & Bovy (2023)](https://arxiv.org/abs/2308.10944), referred to as LB23, and their [Github repository](https://github.com/henrysky/astroNN_stars_foundation). To see examples of the code in use, see `training/` and `results/`.
+The `model_core/` directory contains the core implementation of **SpectraFM**, our Transformer-based foundation model for analyzing stellar spectra. This model is designed to handle spectral data from any instrument and wavelength range, providing a versatile tool for astrophysical research. The code in this directory is adapted and extended from the foundational work of [Leung & Bovy (2023)](https://arxiv.org/abs/2308.10944), referred to as LB23, and their [Github repository](https://github.com/henrysky/astroNN_stars_foundation).
 
-## Contents
+### Contents
 
 - `stellarperceptron/`: A package containing the main model code.
   - `model.py`: Defines the `StellarPerceptron` class, which implements the Transformer-based architecture for stellar spectroscopy.
@@ -10,7 +10,7 @@ The `model_core/` directory contains the core implementation of **SpectraFM**, o
   - `nn_utils.py`: Utility functions for neural network operations, including custom loss functions and training utilities.
   - `model_core.py`: Core functions and classes that support the model's configuration, initialization, and training procedures.
 
-## Relation to LB23
+### Relation to LB23
 
 The code in `model_core/` is adapted from LB23, which introduced a proof-of-concept Transformer-based foundation model for stellar parameter estimation using Gaia spectra and auxiliary data. Our adaptation extends this model to handle high-resolution stellar spectra from any wavelength range and instrument, enabling the analysis of a broader range of spectroscopic data.
 
@@ -20,9 +20,9 @@ Key adaptations and extensions include:
 
 - Scaled Context Length: We scaled up the model to accept inputs significantly larger than the original context length used in LB23 (64). This paper uses a context length of 512. We have successfully trained on the full spectra (7514) and are currently analyzing the results which will be detailed in future work.
 
-## Detailed Descriptions
+### Detailed Descriptions
 
-### `stellarperceptron/model.py`
+#### `stellarperceptron/model.py`
 
 Defines the `StellarPerceptron` class, which serves as the main interface for the Transformer-based model. Key features include:
 
@@ -34,7 +34,7 @@ Defines the `StellarPerceptron` class, which serves as the main interface for th
 
 - **Loading and Saving**: Includes methods to save and load model checkpoints, ensuring that trained models can be reused and shared. See examples for how to use these in `training/`.
 
-### `stellarperceptron/layers.py`
+#### `stellarperceptron/layers.py`
 
 Contains custom neural network layers and modules used in the model:
 
@@ -46,7 +46,7 @@ Contains custom neural network layers and modules used in the model:
 
 - **StellarPerceptronTorchModel**: Wraps the embedding layer, encoder, and decoder into one model.
 
-### `stellarperceptron/nn_utils.py`
+#### `stellarperceptron/nn_utils.py`
 
 Provides utility functions and classes for neural network operations:
 
@@ -54,7 +54,7 @@ Provides utility functions and classes for neural network operations:
 
 - **TrainingGenerator**: A custom data generator class that handles batching, shuffling, and preparing data for training.
 
-### `stellarperceptron/model_core.py`
+#### `stellarperceptron/model_core.py`
 
 Contains core classes and methods that support the overall functionality of the model:
 
