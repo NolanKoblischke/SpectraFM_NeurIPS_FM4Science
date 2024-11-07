@@ -1,6 +1,6 @@
 ## Overview
 
-The `model_core/` directory contains the core implementation of **SpectraFM**, our Transformer-based foundation model for analyzing stellar spectra. This model is designed to handle spectral data from any instrument and wavelength range, providing a versatile tool for astrophysical research. The code in this directory is adapted and extended from the foundational work of [Leung & Bovy (2023)](https://arxiv.org/abs/2308.10944), referred to as LB23, and their [Github repository](https://github.com/henrysky/astroNN_stars_foundation).
+The `model_core/` directory contains the core implementation of **SpectraFM**, our Transformer-based foundation model for analyzing stellar spectra. This model is designed to handle spectral data from any instrument and wavelength range. For this study, we focused on real and synthetic APOGEE spectra. The code in this directory is adapted and extended from the foundational work of [Leung & Bovy (2023)](https://arxiv.org/abs/2308.10944), referred to as LB23, and their [Github repository](https://github.com/henrysky/astroNN_stars_foundation).
 
 ### Contents
 
@@ -22,7 +22,7 @@ Key adaptations and extensions include:
 
 ### Detailed Descriptions
 
-#### `stellarperceptron/model.py`
+`stellarperceptron/model.py`
 
 Defines the `StellarPerceptron` class, which serves as the main interface for the Transformer-based model. Key features include:
 
@@ -34,7 +34,7 @@ Defines the `StellarPerceptron` class, which serves as the main interface for th
 
 - **Loading and Saving**: Includes methods to save and load model checkpoints, ensuring that trained models can be reused and shared. See examples for how to use these in `training/`.
 
-#### `stellarperceptron/layers.py`
+`stellarperceptron/layers.py`
 
 Contains custom neural network layers and modules used in the model:
 
@@ -46,7 +46,7 @@ Contains custom neural network layers and modules used in the model:
 
 - **StellarPerceptronTorchModel**: Wraps the embedding layer, encoder, and decoder into one model.
 
-#### `stellarperceptron/nn_utils.py`
+`stellarperceptron/nn_utils.py`
 
 Provides utility functions and classes for neural network operations:
 
@@ -54,7 +54,7 @@ Provides utility functions and classes for neural network operations:
 
 - **TrainingGenerator**: A custom data generator class that handles batching, shuffling, and preparing data for training.
 
-#### `stellarperceptron/model_core.py`
+`stellarperceptron/model_core.py`
 
 Contains core classes and methods that support the overall functionality of the model:
 
