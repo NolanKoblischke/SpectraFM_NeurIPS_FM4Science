@@ -1,21 +1,20 @@
 ## SpectraFM: Tuning into Stellar Foundation Models
+Accepted to NeurIPS 2024 Workshop on Foundation Models for Science. Nolan Koblischke, Jo Bovy. Nov 7, 2024.
 
 [Paper on OpenReview](https://openreview.net/forum?id=HLEQrER65D)
 
-This repository contains code, data preparation scripts, and model files for SpectraFM, a Transformer-based foundation model designed for cross-instrument spectroscopic analysis in stellar astrophysics. This version was published for the NeurIPS 2024 Foundation Models for Science workshop. Here we focus on APOGEE spectra. SpectraFM leverages synthetic and real spectroscopic data, along with a wavelength encoding mechanism, to predict stellar properties and chemical abundances across multiple datasets and wavelength ranges. Our model can achieve high accuracy in chemical abundance prediction via transfer knowledge from synthetic to real observational data with minimal fine-tuning.
+This repository contains code, data preparation scripts, and model files for SpectraFM, a Transformer-based foundation model designed for cross-instrument spectroscopic analysis in stellar astrophysics. Here we focus on APOGEE spectra, leveraging synthetic and real spectroscopic data, along with a wavelength encoding mechanism, to predict stellar properties and chemical abundances across multiple wavelength ranges. Our model can achieve high accuracy in chemical abundance prediction via knowledge transfer from synthetic to real spectra with minimal fine-tuning (~100s of stars).
 
 Intermediate training data files and model files will soon be available in Zenodo (waiting for a doi from ArXiv before making a Zenodo upload).
 
-#### `dataset/`
+`dataset/`
 
 This folder contains scripts and data files used for preparing the dataset. It includes code for loading APOGEE spectra data, removing bad spectra as determined by a series of cuts, cleaning the spectra, and splitting it into training and testing sets suitable for model training and evaluation.
 
 - `create_dataset.py`: Script to load raw APOGEE spectral data, perform cleaning (e.g., removing bad spectra, handling missing values), and split the data into training and testing sets.
-- `apogee_wavelength_sol.csv`: Wavelength solution file for the APOGEE spectra, providing the wavelength corresponding to each pixel in the spectra.
-- `spectra_all_zeroes_flag.npy`: Used to flag spectra that contain all zeroes and should be excluded from analysis.
 
 
-#### `model_core/`
+`model_core/`
 
 Contains the core implementation of the transformer neural network SpectraFM, including the main architecture and utility functions like loading the data for training.
 
@@ -24,28 +23,26 @@ Contains the core implementation of the transformer neural network SpectraFM, in
   - `layers.py`: Custom neural network layers used in the model, such as attention mechanisms tailored for spectra.
   - `nn_utils.py`: Utility functions for neural network operations, including loss functions and optimization utilities.
   - `model_core.py`: Core functions and classes that support the model, including configurations and model initialization.
-- `utils/`: Utility scripts for data handling and plotting.
-  - `data_utils.py`: Functions for data manipulation and preprocessing, such as normalization and batching.
 
-#### `training/`
+`training/`
 
 Includes scripts, configurations, and logs related to every step of our training process.
 
 - `1_basemodel_synthetic/`: Training scripts and outputs for the base model pre-trained on synthetic spectra.
   - `trainingAPOGEEGPU.py`: Script used to train the base model on synthetic spectra from ASPCAP covering the full wavelength range (1.515 μm - 1.694 μm) with a context length of 512 pixels.
-  - `model_torch/`: Contains the final trained checkpoint `epoch_325`.
+  - `model_torch/`: Contains the final trained checkpoint `epoch_325` (Soon to be available in Zenodo).
 - `2_realfinetune_firsthalf/`: Fine-tuning the base model on real spectra from the first half of the wavelength range.
   - `finetuningAPOGEE.py`: Script to fine-tune the pre-trained model on real spectra in the wavelength range of 1.515 μm - 1.603 μm. This step adapts the model to real observational data and is compared to AstroNN models trained on the same data, as discussed in the paper.
-  - `epoch_10/`: Directory containing the model checkpoint after fine-tuning for 10 epochs, representing the model used in the subsequent evaluations.
+  - `epoch_10/`: Directory containing the model checkpoint after fine-tuning for 10 epochs, representing the model used in the subsequent evaluations. (Soon to be available in Zenodo).
 - `3_fefinetune_chunk/`: Scripts for further fine-tuning the model specifically for iron abundance ([Fe/H]) prediction in a particular wavelength chunk (1.611 μm - 1.622 μm) around two prominent iron lines with only 100 iron-rich spectra ([Fe/H] > -1.0).
-  - `epoch_120/`: Contains the model checkpoint after 120 epochs of fine-tuning, which is used for the [Fe/H] prediction tasks.
+  - `epoch_120/`: Contains the model checkpoint after 120 epochs of fine-tuning, which is used for the [Fe/H] prediction tasks. (Soon to be available in Zenodo).
 - `basic_NN/`: Implementation of the basic linear neural network trained from scratch on real spectra, serving as a baseline for comparison for the [Fe/H] prediction task (1.611 μm - 1.622 μm) with the same 100 iron-rich spectra.
   - `TrainingNN.py`:
   - `NN_pred_true_may28_4_987_138.csv`: Predictions made by the basic neural network, used for comparison in the results section.
   - `checkpoints/`: Contains the saved model checkpoints for the basic neural network.
 - Additional scripts (`*.sh`, `*.out`): Shell scripts and output logs from training sessions.
 
-#### `results/`
+`results/`
 
 Contains scripts and data for evaluating the models and generating the figures presented in the paper.
 
@@ -66,9 +63,9 @@ Contains scripts and data for evaluating the models and generating the figures p
 
 - **Python 3.x**
 - `PyTorch`
-- See `enviornment.yml` for a complete list of dependencies.
+- See `environment.yml` for a complete list of dependencies.
 - **Other Dependencies:**
-  - Access to APOGEE spectra data files for data preparation. (See Zenodo link)
+  - Access to APOGEE spectra data files for data preparation. (Soon to be available in Zenodo)
   - A GPU.
 
 #### Notes
