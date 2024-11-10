@@ -64,23 +64,19 @@ labels_err_train = np.load("../../dataset/label_errs_train.npy")
 wavelength_sol = np.loadtxt("../../dataset/apogee_wavelength_sol.csv", delimiter=",")
 label_columns = [
     'TEFF', 'LOGG',
-    'O_FE', 'MG_FE', 'SI_FE', 
-    'TI_FE', 'TIII_FE', 
-     'FE_H',  'NI_FE',
+    'O_FE', 'MG_FE', 
+     'FE_H'
 ]
 
-NI_index = label_columns.index('NI_FE')
-SI_index = label_columns.index('SI_FE')
-TI_index = label_columns.index('TI_FE')
-TIII_index = label_columns.index('TIII_FE')
+
 TEFF_index = label_columns.index('TEFF')
 LOGG_index = label_columns.index('LOGG')
 O_FE_index = label_columns.index('O_FE')
 MG_FE_index = label_columns.index('MG_FE')
 
-label_columns =  np.delete(label_columns, [SI_index, TI_index, TIII_index, NI_index, TEFF_index, LOGG_index, O_FE_index, MG_FE_index])
-labels_train = np.delete(labels_train, [SI_index, TI_index, TIII_index, NI_index, TEFF_index, LOGG_index, O_FE_index, MG_FE_index], axis=1)
-labels_err_train = np.delete(labels_err_train, [SI_index, TI_index, TIII_index, NI_index, TEFF_index, LOGG_index, O_FE_index, MG_FE_index], axis=1)
+label_columns =  np.delete(label_columns, [TEFF_index, LOGG_index, O_FE_index, MG_FE_index])
+labels_train = np.delete(labels_train, [TEFF_index, LOGG_index, O_FE_index, MG_FE_index], axis=1)
+labels_err_train = np.delete(labels_err_train, [TEFF_index, LOGG_index, O_FE_index, MG_FE_index], axis=1)
 spectra_train = spectra_train[:, spectra_indices]
 
 # Get the same 100 iron-rich stars used for training the Transformer model
@@ -146,8 +142,8 @@ spectra_test = np.load("../../dataset/aspcap_spectra_test.npy")
 spectra_test[np.isnan(spectra_test)] = 1.0
 labels_test = np.load("../../dataset/labels_test.npy")
 labels_err_test = np.load("../../dataset/label_errs_test.npy")
-labels_test = np.delete(labels_test, [SI_index, TI_index, TIII_index, NI_index, TEFF_index, LOGG_index, O_FE_index, MG_FE_index], axis=1)
-labels_err_test = np.delete(labels_err_test, [SI_index, TI_index, TIII_index, NI_index, TEFF_index, LOGG_index, O_FE_index, MG_FE_index], axis=1)
+labels_test = np.delete(labels_test, [TEFF_index, LOGG_index, O_FE_index, MG_FE_index], axis=1)
+labels_err_test = np.delete(labels_err_test, [TEFF_index, LOGG_index, O_FE_index, MG_FE_index], axis=1)
 spectra_test = spectra_test[:, spectra_indices]
 test_dataset = SpectraDataset(spectra_test, labels_test, labels_err_test, spectra_mean, labels_mean, labels_std)
 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)

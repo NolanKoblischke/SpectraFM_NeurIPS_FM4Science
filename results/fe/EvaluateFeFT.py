@@ -21,30 +21,24 @@ context_window = 512
 # Indices for 1.611 $\mu$m to 1.622 $\mu$m chunk
 spectra_indices = np.arange(4107,4619)
 spectra_size = len(spectra_indices)
-spectra_test = np.load("../dataset/aspcap_spectra_test.npy")
-labels_test = np.load("../dataset/labels_test.npy")
-wavelength_sol = np.loadtxt("../dataset/apogee_wavelength_sol.csv", delimiter=",")
+spectra_test = np.load("../../dataset/aspcap_spectra_test.npy")
+labels_test = np.load("../../dataset/labels_test.npy")
+wavelength_sol = np.loadtxt("../../dataset/apogee_wavelength_sol.csv", delimiter=",")
 
 label_columns = [
     'TEFF', 'LOGG',
-    'O_FE', 'MG_FE', 'SI_FE', 
-    'TI_FE', 'TIII_FE', 
-     'FE_H',  'NI_FE',
+    'O_FE', 'MG_FE',
+     'FE_H'
 ]
 
-NI_index = label_columns.index('NI_FE')
-SI_index = label_columns.index('SI_FE')
-TI_index = label_columns.index('TI_FE')
-TIII_index = label_columns.index('TIII_FE')
 TEFF_index = label_columns.index('TEFF')
-LOGG_index = label_columns.index('LOGG')
 FEH_index = label_columns.index('FE_H')
 O_FE_index = label_columns.index('O_FE')
 MG_FE_index = label_columns.index('MG_FE')
 
 feh = labels_test[:, FEH_index]
-label_columns =  np.delete(label_columns, [SI_index, TI_index, TIII_index, NI_index, TEFF_index, LOGG_index, O_FE_index, MG_FE_index])
-labels_test = np.delete(labels_test, [SI_index, TI_index, TIII_index, NI_index, TEFF_index, O_FE_index, MG_FE_index], axis=1)
+label_columns =  np.delete(label_columns, [TEFF_index, O_FE_index, MG_FE_index])
+labels_test = np.delete(labels_test, [TEFF_index, O_FE_index, MG_FE_index], axis=1)
 
 spectra_token_names = np.array([
     *[f"syn_apogee{i}" for i in spectra_indices],
@@ -60,7 +54,7 @@ batch_size = 1
 predictions = np.zeros((len(spectra_test), 2))
 for i in tqdm(range(len(spectra_test))):
     nn_model.perceive(inputs = spectra_test[i], inputs_token = spectra_token_names_tiled[i], inputs_wavelength=wavelengths_tiled[i])
-    result = nn_model.request(list(label_columns))
+    result = nn_model.request(['FE_H'])
     predictions[i] = result.values
     nn_model.clear_perception()
 

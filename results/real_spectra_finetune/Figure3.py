@@ -66,7 +66,7 @@ plt.text(0.5, 0., 'Actual', horizontalalignment='center', verticalalignment='cen
 # Adjust layout and save
 plt.tight_layout()
 fig.suptitle('Predictions on real spectra after fine-tuning (1.515 $\mu$m - 1.603 $\mu$m) ', fontsize=28)
-plt.savefig('Figure2.png', dpi=300, bbox_inches='tight')
+plt.savefig('Figure3.png', dpi=300, bbox_inches='tight')
 
 from astropy.stats import mad_std
 df_cut = df[(df['LOGG_actual'] > 1.0) & (df['LOGG_actual'] < 3.5)]

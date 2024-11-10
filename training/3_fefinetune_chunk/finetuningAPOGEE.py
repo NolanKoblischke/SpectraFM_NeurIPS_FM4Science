@@ -32,24 +32,19 @@ wavelength_sol = np.loadtxt("../data/apogee_wavelengt_sol.csv", delimiter=",")
 
 label_columns = [
     'TEFF', 'LOGG',
-    'O_FE', 'MG_FE', 'SI_FE', 
-    'TI_FE', 'TIII_FE', 
-     'FE_H',  'NI_FE',
+    'O_FE', 'MG_FE', 
+     'FE_H', 
 ]
-#only keep Fe_H
-NI_index = label_columns.index('NI_FE')
-SI_index = label_columns.index('SI_FE')
-TI_index = label_columns.index('TI_FE')
-TIII_index = label_columns.index('TIII_FE')
+
 TEFF_index = label_columns.index('TEFF')
 LOGG_index = label_columns.index('LOGG')
 O_FE_index = label_columns.index('O_FE')
 MG_FE_index = label_columns.index('MG_FE')
 
 
-label_columns = np.delete(label_columns, [SI_index, TI_index, TIII_index, NI_index,TEFF_index, LOGG_index, O_FE_index, MG_FE_index])
-labels_train = np.delete(labels_train, [SI_index, TI_index, TIII_index, NI_index,TEFF_index, LOGG_index, O_FE_index, MG_FE_index], axis=1)
-label_errs_train = np.delete(label_errs_train, [SI_index, TI_index, TIII_index, NI_index,TEFF_index, LOGG_index, O_FE_index, MG_FE_index], axis=1)
+label_columns = np.delete(label_columns, [TEFF_index, LOGG_index, O_FE_index, MG_FE_index])
+labels_train = np.delete(labels_train, [TEFF_index, LOGG_index, O_FE_index, MG_FE_index], axis=1)
+label_errs_train = np.delete(label_errs_train, [TEFF_index, LOGG_index, O_FE_index, MG_FE_index], axis=1)
 
 
 training_labels = np.column_stack(

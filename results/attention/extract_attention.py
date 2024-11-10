@@ -21,19 +21,9 @@ n_stars_for_test = len(spectra_test)
 
 label_columns = [
     'TEFF', 'LOGG',
-    'O_FE', 'MG_FE', 'SI_FE', 
-    'TI_FE', 'TIII_FE', 
-     'FE_H',  'NI_FE',
+    'O_FE', 'MG_FE', 
+     'FE_H'
 ]
-
-# Select TEFF, LOGG, O_FE, MG_FE, FE_H
-NI_index = label_columns.index('NI_FE')
-SI_index = label_columns.index('SI_FE')
-TI_index = label_columns.index('TI_FE')
-TIII_index = label_columns.index('TIII_FE')
-labels_test = np.delete(labels_test, [NI_index, SI_index, TI_index, TIII_index], axis=1)
-#save labels_test to labels_test.csv
-label_columns = np.delete(label_columns, [SI_index, TI_index, TIII_index, NI_index])
 
 # Load and process the wavelength solution
 wavelength_sol = np.loadtxt("../../dataset/apogee_wavelength_sol.csv", delimiter=",")

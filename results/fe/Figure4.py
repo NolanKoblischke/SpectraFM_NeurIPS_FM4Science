@@ -11,11 +11,11 @@ df2 = pd.read_csv('1_basemodel_synthetic_epoch325_fehpredictions.csv')
 df3 = pd.read_csv('2_realfinetune_firsthalf_epoch90_fehpredictions.csv')
 df4 = pd.read_csv('3_fefinetune_chunk_epoch120_fehpredictions.csv')
 
-df_name = ['Neural Network\nTrained from Scratch on Real \nfrom 1.611 $\mu$m to 1.622 $\mu$m', 'SpectraFM\nPre-trained on Synthetic\nfrom 1.515 $\mu$m to 1.694 $\mu$m', 'SpectraFM\nFine-tuned on Real\nfrom 1.515 $\mu$m to 1.603 $\mu$m', 'SpectraFM\nFine-tuned Again on Real\nfrom 1.611 $\mu$m to 1.622 $\mu$m']
+df_name = ['Neural Network\nTrained from Scratch on Real \nfrom 1.611 $\mu$m to 1.622 $\mu$m', 'SpectraFM\nPre-trained on Synthetic\nfrom 1.515 $\mu$m to 1.694 $\mu$m', 'SpectraFM\nFine-tuned on Real\nfrom 1.515 $\mu$m to 1.603 $\mu$m', 'SpectraFM\nFine-tuned on Real\nfrom 1.611 $\mu$m to 1.622 $\mu$m']
 dfs = [df1, df2, df3, df4]
 
-labels_train = np.load("/Users/nolan/Desktop/astrofm/data/Mar20/labels_train.npy")
-label_columns = ['TEFF', 'LOGG', 'O_FE', 'MG_FE', 'SI_FE', 'TI_FE', 'TIII_FE', 'FE_H', 'NI_FE']
+labels_train = np.load("../../dataset/labels_train.npy")
+label_columns = ['TEFF', 'LOGG', 'O_FE', 'MG_FE', 'FE_H']
 fe_h_index = label_columns.index('FE_H')
 logg_index = label_columns.index('LOGG')
 feh_training = labels_train[:, fe_h_index]
@@ -75,4 +75,4 @@ cbar.ax.tick_params(labelsize=25)
 cbar.ax.set_ylabel('Predicted Error', fontsize=30)
 fig.suptitle('[Fe/H] Predictions on Real Spectra from 1.611 $\mu$m to 1.622 $\mu$m',fontsize=40,y=1.3)
 #save
-plt.savefig('Figure3.png',dpi=300,bbox_inches='tight')
+plt.savefig('Figure4.png',dpi=300,bbox_inches='tight')

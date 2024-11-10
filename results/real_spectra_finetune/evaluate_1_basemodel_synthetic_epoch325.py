@@ -5,8 +5,10 @@ from tqdm import tqdm
 from stellarperceptron.model import StellarPerceptron
 
 # Set device and precision
-device = "cuda"
-mixed_precision = True
+# device = "cuda"
+# mixed_precision = True
+device = "cpu"
+mixed_precision = False
 torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.allow_tf32 = True
 
@@ -26,18 +28,9 @@ wavelength_sol = np.loadtxt(wavelength_sol_dir, delimiter=",")
 
 label_columns = [
     'TEFF', 'LOGG',
-    'O_FE', 'MG_FE', 'SI_FE', 
-    'TI_FE', 'TIII_FE', 
-     'FE_H',  'NI_FE',
+    'O_FE', 'MG_FE', 
+     'FE_H'
 ]
-
-NI_index = label_columns.index('NI_FE')
-SI_index = label_columns.index('SI_FE')
-TI_index = label_columns.index('TI_FE')
-TIII_index = label_columns.index('TIII_FE')
-#drop those indices from labels_test
-labels_test = np.delete(labels_test, [NI_index, SI_index, TI_index, TIII_index], axis=1)
-label_columns = np.delete(label_columns, [SI_index, TI_index, TIII_index, NI_index])
 
 # Load and process the wavelength solution
 spectra_indices = np.arange(0, 3757)

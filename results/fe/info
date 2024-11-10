@@ -1,4 +1,0 @@
-epoch_120_doubletuned from fehft_sept6DoubleFT using epoch_10 from realft_sept6 <- currently retraining with epoch_90_realft instead of epoch_10
-epoch_325_512 is the 512 context window basemodel trained on full synthetic spectra from training_aug26_512
-epoch_600_synonlypt_fehft is the 512 context window basemodel trained on full synthetic spectra and fine-tuned on feh from folder fehft_sept5FrozeD512_longer and the 325 model above
-epoch_90_realft is a real spectra (first half) ft of epoch_325_512 from folder realft_sept6
