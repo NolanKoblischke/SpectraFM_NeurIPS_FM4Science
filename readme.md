@@ -5,7 +5,7 @@ Accepted to NeurIPS 2024 Workshop on Foundation Models for Science. Nolan Koblis
 
 This repository contains code, data preparation scripts, and model files for SpectraFM, a Transformer-based foundation model designed for cross-instrument spectroscopic analysis in stellar astrophysics. Here we focus on APOGEE spectra, leveraging synthetic and real spectroscopic data, along with a wavelength encoding mechanism, to predict stellar properties and chemical abundances across multiple wavelength ranges. Our model can achieve high accuracy in chemical abundance prediction via knowledge transfer from synthetic to real spectra with minimal fine-tuning (~100s of stars).
 
-Intermediate training data files and model files will soon be available in Zenodo (waiting for a doi from ArXiv before making a Zenodo upload).
+Training data and model files are available in [Zenodo](https://zenodo.org/records/14041360).
 
 `dataset/`
 
@@ -30,12 +30,12 @@ Includes scripts, configurations, and logs related to every step of our training
 
 - `1_basemodel_synthetic/`: Training scripts and outputs for the base model pre-trained on synthetic spectra.
   - `trainingAPOGEEGPU.py`: Script used to train the base model on synthetic spectra from ASPCAP covering the full wavelength range (1.515 μm - 1.694 μm) with a context length of 512 pixels.
-  - `model_torch/`: Contains the final trained checkpoint `epoch_325` (Soon to be available in Zenodo).
+  - `model_torch/`: Contains the final trained checkpoint `epoch_325`.
 - `2_realfinetune_firsthalf/`: Fine-tuning the base model on real spectra from the first half of the wavelength range.
   - `finetuningAPOGEE.py`: Script to fine-tune the pre-trained model on real spectra in the wavelength range of 1.515 μm - 1.603 μm. This step adapts the model to real observational data and is compared to AstroNN models trained on the same data, as discussed in the paper.
-  - `epoch_10/`: Directory containing the model checkpoint after fine-tuning for 10 epochs, representing the model used in the subsequent evaluations. (Soon to be available in Zenodo).
+  - `epoch_10/`: Directory containing the model checkpoint after fine-tuning for 10 epochs, representing the model used in the subsequent evaluations..
 - `3_fefinetune_chunk/`: Scripts for further fine-tuning the model specifically for iron abundance ([Fe/H]) prediction in a particular wavelength chunk (1.611 μm - 1.622 μm) around two prominent iron lines with only 100 iron-rich spectra ([Fe/H] > -1.0).
-  - `epoch_120/`: Contains the model checkpoint after 120 epochs of fine-tuning, which is used for the [Fe/H] prediction tasks. (Soon to be available in Zenodo).
+  - `epoch_120/`: Contains the model checkpoint after 120 epochs of fine-tuning, which is used for the [Fe/H] prediction tasks..
 - `basic_NN/`: Implementation of the basic linear neural network trained from scratch on real spectra, serving as a baseline for comparison for the [Fe/H] prediction task (1.611 μm - 1.622 μm) with the same 100 iron-rich spectra.
   - `TrainingNN.py`:
   - `NN_pred_true_may28_4_987_138.csv`: Predictions made by the basic neural network, used for comparison in the results section.
@@ -65,7 +65,7 @@ Contains scripts and data for evaluating the models and generating the figures p
 - `PyTorch`
 - See `environment.yml` for a complete list of dependencies.
 - **Other Dependencies:**
-  - Access to APOGEE spectra data files for data preparation. (Soon to be available in Zenodo)
+  - Access to APOGEE spectra data files for data preparation. [Zenodo](https://zenodo.org/records/14041360)
   - A GPU.
 
 #### Notes
